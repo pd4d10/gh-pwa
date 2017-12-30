@@ -1,7 +1,8 @@
 {
-  "name": "gh-pwa",
+  "name": "gh",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://gh.now.sh",
   "dependencies": {
     "apollo-client-preset": "^1.0.5",
     "apollo-link-context": "^1.0.3",
@@ -20,6 +21,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "cp now.json build; now build; now alias"
   }
 }
