@@ -11,7 +11,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import Header from './containers/header'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { token } from './token'
-import { Route, HashRouter, Switch } from 'react-router-dom'
+import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import User from './containers/user'
 import { Followers } from './containers/followers'
 import { colors } from './constants'
@@ -61,7 +61,7 @@ const Container = styled.div`
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <HashRouter>
+    <BrowserRouter>
       <MuiThemeProvider muiTheme={muiTheme}>
         <Header />
         <Container>
@@ -75,7 +75,7 @@ ReactDOM.render(
           </Switch>
         </Container>
       </MuiThemeProvider>
-    </HashRouter>
+    </BrowserRouter>
   </ApolloProvider>,
   document.getElementById('root')
 )
