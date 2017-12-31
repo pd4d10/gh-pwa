@@ -14,8 +14,15 @@ const User = ({ data }) => {
         <div>
           <Avatar src={data.user.avatarUrl} />
           <div>
+            Followers:
             <Link to={`/user/${data.user.login}/followers`}>
               {data.user.followers.totalCount}
+            </Link>
+          </div>
+          <div>
+            Repos:
+            <Link to={`/user/${data.user.login}/repositories`}>
+              {data.user.repositories.totalCount}
             </Link>
           </div>
         </div>

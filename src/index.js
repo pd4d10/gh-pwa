@@ -19,6 +19,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import NotFound from './components/not-found'
 import styled from 'styled-components'
 import { Following } from './containers/following'
+import { Repositories } from './containers/repositories'
+import { Repository } from './containers/repository'
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -64,6 +66,8 @@ ReactDOM.render(
         <Header />
         <Container>
           <Switch>
+            <Route path="/repository/:owner/:name" component={Repository} />
+            <Route path="/user/:login/repositories" component={Repositories} />
             <Route path="/user/:login/followers" component={Followers} />
             <Route path="/user/:login/following" component={Following} />
             <Route path="/user/:login" component={User} />
