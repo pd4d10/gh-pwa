@@ -3,14 +3,11 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { withRouter, Link } from 'react-router-dom'
 import { loadingEnhancer } from '../components/loading'
-import styled from 'styled-components'
 import { UserItem } from '../components/user-item'
 import compose from 'recompose/compose'
 
-const Followers = ({ data }) => (
-  <div>
-    {data.user.followers.nodes.map(follower => <UserItem {...follower} />)}
-  </div>
+const Followers = ({ data: { user } }) => (
+  <div>{user.followers.nodes.map(follower => <UserItem {...follower} />)}</div>
 )
 
 const query = gql`

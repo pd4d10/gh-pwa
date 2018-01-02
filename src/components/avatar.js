@@ -1,7 +1,13 @@
-import styled from 'styled-components'
+import React from 'react'
 
-export const Avatar = styled.img`
-  width: 48px;
-  height: 48px;
-  border-radius: 4px;
-`
+export const Avatar = props => (
+  <img
+    {...props}
+    style={{
+      width: 48,
+      height: 48,
+      borderRadius: 4,
+      ...(props.style || {}),
+    }}
+  />
+)

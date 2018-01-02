@@ -3,16 +3,11 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { withRouter, Link } from 'react-router-dom'
 import { LoadingWrapper, loadingEnhancer } from '../components/loading'
-import styled from 'styled-components'
 import { UserItem } from '../components/user-item'
 import compose from 'recompose/compose'
 
-const Following = ({ data }) => (
-  <LoadingWrapper data={data}>
-    <div>
-      {data.user.following.nodes.map(follower => <UserItem {...follower} />)}
-    </div>
-  </LoadingWrapper>
+const Following = ({ data: { user } }) => (
+  <div>{user.following.nodes.map(follower => <UserItem {...follower} />)}</div>
 )
 
 const query = gql`

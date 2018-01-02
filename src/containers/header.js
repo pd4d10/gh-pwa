@@ -6,7 +6,6 @@ import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back'
 import Drawer from 'material-ui/Drawer'
 import Divider from 'material-ui/Divider'
 import List from 'material-ui/List'
-import styled from 'styled-components'
 import withState from 'recompose/withState'
 import compose from 'recompose/compose'
 

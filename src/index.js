@@ -17,10 +17,10 @@ import Followers from './containers/followers'
 import { colors } from './constants'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import NotFound from './components/not-found'
-import styled from 'styled-components'
 import Following from './containers/following'
 import Repositories from './containers/repositories'
 import Repository from './containers/repository'
+import Stars from './containers/stars'
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -54,26 +54,27 @@ const muiTheme = getMuiTheme({
   },
 })
 
-const Container = styled.div`
-  margin-top: 56px;
-  /* padding: 10px; */
-`
-
 ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
       <MuiThemeProvider muiTheme={muiTheme}>
-        <Header />
-        <Container>
-          <Switch>
-            <Route path="/repository/:owner/:name" component={Repository} />
-            <Route path="/user/:login/repositories" component={Repositories} />
-            <Route path="/user/:login/followers" component={Followers} />
-            <Route path="/user/:login/following" component={Following} />
-            <Route path="/user/:login" component={User} />
-            <Route component={NotFound} />
-          </Switch>
-        </Container>
+        <div>
+          <Header />
+          <div style={{ marginTop: 56 }}>
+            <Switch>
+              <Route path="/repository/:owner/:name" component={Repository} />
+              <Route path="/user/:login/stars" component={Stars} />
+              <Route
+                path="/user/:login/repositories"
+                component={Repositories}
+              />
+              <Route path="/user/:login/followers" component={Followers} />
+              <Route path="/user/:login/following" component={Following} />
+              <Route path="/user/:login" component={User} />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
+        </div>
       </MuiThemeProvider>
     </BrowserRouter>
   </ApolloProvider>,

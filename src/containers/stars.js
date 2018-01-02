@@ -11,7 +11,10 @@ const query = gql`
     user(login: $login) {
       login
       avatarUrl
-      repositories(first: 20, orderBy: { field: UPDATED_AT, direction: DESC }) {
+      starredRepositories(
+        first: 20
+        orderBy: { field: STARRED_AT, direction: DESC }
+      ) {
         nodes {
           name
           owner {
@@ -44,5 +47,5 @@ export default compose(
   }),
   loadingEnhancer
 )(({ data: { user } }) => (
-  <Repositories repositories={user.repositories} login={user.login} />
+  <Repositories repositories={user.starredRepositories} login={user.login} />
 ))
