@@ -17,3 +17,22 @@ const Loading = () => (
 )
 
 export default Loading
+
+// https://stackoverflow.com/questions/32370994/how-to-pass-props-to-this-props-children
+export const LoadingWrapper = ({ data, children }) =>
+  data.loading ? (
+    <Container>
+      <CircularProgress />
+    </Container>
+  ) : (
+    React.cloneElement(children, { data })
+  )
+
+export const loadingEnhancer = Component => ({ data }) =>
+  data.loading ? (
+    <Container>
+      <CircularProgress />
+    </Container>
+  ) : (
+    <Component data={data} />
+  )

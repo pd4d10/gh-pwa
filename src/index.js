@@ -13,14 +13,14 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { token } from './token'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import User from './containers/user'
-import { Followers } from './containers/followers'
+import Followers from './containers/followers'
 import { colors } from './constants'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import NotFound from './components/not-found'
 import styled from 'styled-components'
-import { Following } from './containers/following'
-import { Repositories } from './containers/repositories'
-import { Repository } from './containers/repository'
+import Following from './containers/following'
+import Repositories from './containers/repositories'
+import Repository from './containers/repository'
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
