@@ -9,13 +9,12 @@ import { HttpLink, createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import Header from './containers/header'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import { token } from './token'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import User from './containers/user'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import Followers from './containers/followers'
 import { colors } from './constants'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import NotFound from './components/not-found'
 import Following from './containers/following'
 import Repositories from './containers/repositories'
@@ -48,7 +47,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
-const muiTheme = getMuiTheme({
+const theme = createMuiTheme({
   appBar: {
     color: colors.primary,
   },
@@ -57,7 +56,7 @@ const muiTheme = getMuiTheme({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <MuiThemeProvider muiTheme={muiTheme}>
+      <MuiThemeProvider theme={theme}>
         <div>
           <Header />
           <div style={{ marginTop: 56 }}>

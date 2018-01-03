@@ -5,7 +5,7 @@ import { withRouter, Link } from 'react-router-dom'
 import Loading, { loadingEnhancer } from '../components/loading'
 import { Avatar } from '../components/avatar'
 import compose from 'recompose/compose'
-import { List, ListItem } from 'material-ui/List'
+import List, { ListItem } from 'material-ui/List'
 import { Repo } from '../icons'
 import { colors } from '../constants'
 
