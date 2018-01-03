@@ -26,5 +26,5 @@ export const Loading = () => (
 //   )
 
 export const loadingEnhancer = Component => {
-  return ({ data }) => (data.loading ? <Loading /> : <Component data={data} />)
+  return props => (props.data.loading ? <Loading /> : <Component {...props} />)
 }

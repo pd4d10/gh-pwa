@@ -5,9 +5,18 @@ import { withRouter, Link } from 'react-router-dom'
 import Loading, { loadingEnhancer } from '../components/loading'
 import { Avatar } from '../components/avatar'
 import compose from 'recompose/compose'
+import Tabs, { Tab } from 'material-ui/Tabs'
 import List, { ListItem } from 'material-ui/List'
 import { Repo } from '../icons'
 import { colors } from '../constants'
+import withState from 'recompose/withState'
+import SwipeableViews from 'react-swipeable-views'
+import UserRepositories from './user-repositories'
+import UserOverview from './user-overview'
+import UserStars from './user-stars'
+import UserFollowers from './user-followers'
+import UserFollowing from './user-following'
+import withStyles from 'material-ui/styles/withStyles'
 
 const CountItem = ({ count, name, login }) => (
   <Link
@@ -19,10 +28,43 @@ const CountItem = ({ count, name, login }) => (
   </Link>
 )
 
-const User = ({ data: { user } }) => (
-  <div style={{ padding: 12 }}>
-    <Avatar src={user.avatarUrl} />
-    <div
+// const getTab = location => {
+//   const params = new URLSearchParams(location.search)
+//   return params.get('tab')
+// }
+
+const tabs = ['Overview', 'Repositories', 'Stars', 'Followers', 'Following']
+
+const User = ({ data: { user }, activeTab, ...props }) => (
+  <div>
+    <Tabs
+      classes={{
+        flexContainer: props.classes.tabs,
+      }}
+      value={activeTab}
+      onChange={(event, value) => props.setActiveTab(() => value)}
+      indicatorColor="primary"
+      textColor="primary"
+      scrollable
+      scrollButtons="auto"
+    >
+      {tabs.map((label, i) => <Tab label={label} key={label} />)}
+    </Tabs>
+    <div style={{ padding: 12 }}>
+      <SwipeableViews
+        // axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+        axis="x"
+        index={activeTab}
+        onChangeIndex={index => props.setActiveTab(() => index)}
+      >
+        {activeTab === 0 && <UserOverview />}
+        {activeTab === 1 && <UserRepositories />}
+        {activeTab === 2 && <UserStars />}
+        {activeTab === 3 && <UserFollowers />}
+        {activeTab === 4 && <UserFollowing />}
+      </SwipeableViews>
+    </div>
+    {/* <div
       style={{
         display: 'flex',
         fontSize: 12,
@@ -50,18 +92,7 @@ const User = ({ data: { user } }) => (
         name="Following"
         login={user.login}
       />
-    </div>
-    <List>
-      {user.pinnedRepositories.nodes.map(node => (
-        <Link to={`/repository/${node.nameWithOwner}`} key={node.nameWithOwner}>
-          <ListItem>
-            <Repo />
-            {node.nameWithOwner}
-            {node.stargazers.totalCount}
-          </ListItem>
-        </Link>
-      ))}
-    </List>
+    </div> */}
   </div>
 )
 
@@ -105,5 +136,9 @@ export default compose(
       variables: { login: match.params.login },
     }),
   }),
-  loadingEnhancer
+  loadingEnhancer,
+  withState('activeTab', 'setActiveTab', 1),
+  withStyles({
+    tabs: { paddingLeft: 30 },
+  })
 )(User)

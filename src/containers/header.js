@@ -6,8 +6,12 @@ import { withRouter } from 'react-router-dom'
 import IconButton from 'material-ui/IconButton'
 import ArrowBack from 'material-ui-icons/ArrowBack'
 import Drawer from 'material-ui/Drawer'
+import Typography from 'material-ui/Typography'
 import Divider from 'material-ui/Divider'
-import List from 'material-ui/List'
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
+import Settings from 'material-ui-icons/Settings'
+import Info from 'material-ui-icons/Info'
+import Menu from 'material-ui-icons/Menu'
 import withState from 'recompose/withState'
 import compose from 'recompose/compose'
 
@@ -15,26 +19,12 @@ function getTitle(history) {
   history.path
 }
 
-const Header = p => (
+const Header = props => (
   <div>
-    <Helmet>
+    {/* <Helmet>
       <title>abc</title>
-    </Helmet>
+    </Helmet> */}
     <AppBar
-    // style={{
-    //   position: 'fixed',
-    //   top: 0,
-    // }}
-    // iconStyleLeft={{
-    //   width: '44px',
-    //   height: '44px',
-    //   marginTop: '4px',
-    // }}
-    // titleStyle={{
-    //   fontSize: '22px',
-    //   height: '56px',
-    //   lineHeight: '56px',
-    // }}
     // iconElementLeft={
     //   // Have to be a conditional operator instead of disjunction
     //   p.isListPage ? (
@@ -59,20 +49,40 @@ const Header = p => (
     // }}
     >
       <Toolbar>
-        <IconButton>
-          <ArrowBack />
-        </IconButton>
-        adf
+        {props.location.pathname === '/' ? (
+          <IconButton
+            color="contrast"
+            aria-label="Menu"
+            onClick={() => props.setOpen(() => true)}
+          >
+            <Menu />
+          </IconButton>
+        ) : (
+          <IconButton
+            color="contrast"
+            aria-label="Back"
+            onClick={() => props.history.goBack()}
+          >
+            <ArrowBack />
+          </IconButton>
+        )}
+        <Typography color="inherit">{props.title}</Typography>
       </Toolbar>
     </AppBar>
-    <Drawer
-      docked={false}
-      width={220}
-      open={p.open}
-      onRequestChange={() => p.setOpen(open => !open)}
-    >
-      <List>
-        <Divider />
+    <Drawer open={props.open} onClose={() => props.setOpen(() => false)}>
+      <List style={{ width: 220 }}>
+        <ListItem button>
+          <ListItemIcon>
+            <Settings />
+          </ListItemIcon>
+          <ListItemText primary="Settings" />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <Info />
+          </ListItemIcon>
+          <ListItemText primary="About" />
+        </ListItem>
       </List>
     </Drawer>
   </div>

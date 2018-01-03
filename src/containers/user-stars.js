@@ -38,6 +38,13 @@ const query = gql`
   }
 `
 
+const UserStars = ({ data: { user } }) =>
+  user.starredRepositories.length ? (
+    <Repositories repositories={user.starredRepositories} login={user.login} />
+  ) : (
+    "You don't have any starred repositories yet."
+  )
+
 export default compose(
   withRouter,
   graphql(query, {
@@ -46,6 +53,4 @@ export default compose(
     }),
   }),
   loadingEnhancer
-)(({ data: { user } }) => (
-  <Repositories repositories={user.starredRepositories} login={user.login} />
-))
+)(UserStars)

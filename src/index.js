@@ -13,13 +13,13 @@ import { token } from './token'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import User from './containers/user'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
-import Followers from './containers/followers'
+// import UserFollowers from './containers/followers'
 import { colors } from './constants'
 import NotFound from './components/not-found'
-import Following from './containers/following'
-import Repositories from './containers/repositories'
+// import Following from './containers/following'
+// import Repositories from './containers/repositories'
 import Repository from './containers/repository'
-import Stars from './containers/stars'
+// import Stars from './containers/stars'
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -48,9 +48,9 @@ const client = new ApolloClient({
 })
 
 const theme = createMuiTheme({
-  appBar: {
-    color: colors.primary,
-  },
+  // appBar: {
+  //   color: colors.primary,
+  // },
 })
 
 ReactDOM.render(
@@ -62,13 +62,13 @@ ReactDOM.render(
           <div style={{ marginTop: 56 }}>
             <Switch>
               <Route path="/repository/:owner/:name" component={Repository} />
-              <Route path="/user/:login/stars" component={Stars} />
+              {/* <Route path="/user/:login/stars" component={Stars} />
               <Route
                 path="/user/:login/repositories"
                 component={Repositories}
               />
               <Route path="/user/:login/followers" component={Followers} />
-              <Route path="/user/:login/following" component={Following} />
+              <Route path="/user/:login/following" component={Following} /> */}
               <Route path="/user/:login" component={User} />
               <Route component={NotFound} />
             </Switch>
