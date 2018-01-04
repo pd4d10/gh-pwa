@@ -7,6 +7,7 @@ import IconButton from 'material-ui/IconButton'
 import ArrowBack from 'material-ui-icons/ArrowBack'
 import Drawer from 'material-ui/Drawer'
 import Typography from 'material-ui/Typography'
+import { Link } from 'react-router-dom'
 import Divider from 'material-ui/Divider'
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import Settings from 'material-ui-icons/Settings'
@@ -71,18 +72,22 @@ const Header = props => (
     </AppBar>
     <Drawer open={props.open} onClose={() => props.setOpen(() => false)}>
       <List style={{ width: 220 }}>
-        <ListItem button>
-          <ListItemIcon>
-            <Settings />
-          </ListItemIcon>
-          <ListItemText primary="Settings" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <Info />
-          </ListItemIcon>
-          <ListItemText primary="About" />
-        </ListItem>
+        <Link to="/settings">
+          <ListItem button divider>
+            <ListItemIcon>
+              <Settings />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </ListItem>
+        </Link>
+        <Link to="/about">
+          <ListItem button>
+            <ListItemIcon>
+              <Info />
+            </ListItemIcon>
+            <ListItemText primary="About" />
+          </ListItem>
+        </Link>
       </List>
     </Drawer>
   </div>

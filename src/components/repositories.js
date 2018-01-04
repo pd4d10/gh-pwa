@@ -14,11 +14,11 @@ export const Repositories = ({ repositories, login }) => (
     {repositories.nodes.map(repo => (
       <Link to={`/repository/${repo.owner.login}/${repo.name}`}>
         <ListItem
-          innerDivStyle={{
-            display: 'flex',
-            padding: '12px',
-            borderBottom: '1px solid #eee',
-          }}
+          // style={{
+          //   display: 'flex',
+          //   padding: '12px',
+          //   borderBottom: '1px solid #eee',
+          // }}
         >
           <div style={{ flexBasis: 20 }}>
             {repo.isFork ? <Fork /> : <Repo />}

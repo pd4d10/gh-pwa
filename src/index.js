@@ -16,6 +16,9 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 // import UserFollowers from './containers/followers'
 import { colors } from './constants'
 import NotFound from './components/not-found'
+import Home from './containers/home'
+import About from './containers/about'
+import Settings from './containers/settings'
 // import Following from './containers/following'
 // import Repositories from './containers/repositories'
 import Repository from './containers/repository'
@@ -61,6 +64,7 @@ ReactDOM.render(
           <Header />
           <div style={{ marginTop: 56 }}>
             <Switch>
+              <Route exact path="/" component={Home} />
               <Route path="/repository/:owner/:name" component={Repository} />
               {/* <Route path="/user/:login/stars" component={Stars} />
               <Route
@@ -70,6 +74,8 @@ ReactDOM.render(
               <Route path="/user/:login/followers" component={Followers} />
               <Route path="/user/:login/following" component={Following} /> */}
               <Route path="/user/:login" component={User} />
+              <Route path="/settings" component={Settings} />
+              <Route path="/about" component={About} />
               <Route component={NotFound} />
             </Switch>
           </div>

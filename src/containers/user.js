@@ -18,15 +18,15 @@ import UserFollowers from './user-followers'
 import UserFollowing from './user-following'
 import withStyles from 'material-ui/styles/withStyles'
 
-const CountItem = ({ count, name, login }) => (
-  <Link
-    to={`/user/${login}/${name.toLowerCase()}`}
-    style={{ flex: 1, textAlign: 'center' }}
-  >
-    <div style={{ color: colors.primary, fontSize: 14 }}>{count}</div>
-    <div style={{ color: colors.grey }}>{name}</div>
-  </Link>
-)
+// const CountItem = ({ count, name, login }) => (
+//   <Link
+//     to={`/user/${login}/${name.toLowerCase()}`}
+//     style={{ flex: 1, textAlign: 'center' }}
+//   >
+//     <div style={{ color: colors.primary, fontSize: 14 }}>{count}</div>
+//     <div style={{ color: colors.grey }}>{name}</div>
+//   </Link>
+// )
 
 // const getTab = location => {
 //   const params = new URLSearchParams(location.search)
@@ -35,14 +35,16 @@ const CountItem = ({ count, name, login }) => (
 
 const tabs = ['Overview', 'Repositories', 'Stars', 'Followers', 'Following']
 
-const User = ({ data: { user }, activeTab, ...props }) => (
+const User = ({ data: { user }, activeTab, setActiveTab }) => (
   <div>
     <Tabs
-      classes={{
-        flexContainer: props.classes.tabs,
-      }}
+      classes={
+        {
+          // flexContainer: props.classes.tabs,
+        }
+      }
       value={activeTab}
-      onChange={(event, value) => props.setActiveTab(() => value)}
+      onChange={(event, value) => setActiveTab(() => value)}
       indicatorColor="primary"
       textColor="primary"
       scrollable
@@ -50,18 +52,20 @@ const User = ({ data: { user }, activeTab, ...props }) => (
     >
       {tabs.map((label, i) => <Tab label={label} key={label} />)}
     </Tabs>
-    <div style={{ padding: 12 }}>
+    <div>
       <SwipeableViews
         // axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         axis="x"
         index={activeTab}
-        onChangeIndex={index => props.setActiveTab(() => index)}
+        onChangeIndex={index => setActiveTab(() => index)}
       >
-        {activeTab === 0 && <UserOverview />}
-        {activeTab === 1 && <UserRepositories />}
-        {activeTab === 2 && <UserStars />}
-        {activeTab === 3 && <UserFollowers />}
-        {activeTab === 4 && <UserFollowing />}
+        <div>
+          {activeTab === 0 && <UserOverview />}
+          {activeTab === 1 && <UserRepositories />}
+          {activeTab === 2 && <UserStars />}
+          {activeTab === 3 && <UserFollowers />}
+          {activeTab === 4 && <UserFollowing />}
+        </div>
       </SwipeableViews>
     </div>
     {/* <div

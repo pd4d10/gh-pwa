@@ -14,7 +14,7 @@ import { colors } from '../constants'
 
 export const UserItem = p => (
   <Link to={`/user/${p.login}`}>
-    <ListItem innerDivStyle={{ display: 'flex', padding: '12px' }}>
+    <ListItem style={{ display: 'flex', padding: '12px' }}>
       <Avatar
         src={p.avatarUrl}
         style={{
