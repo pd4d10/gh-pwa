@@ -4,4 +4,5 @@ export const colors = {
   link: '#0366d6',
   border: '#eaecef',
   grey: '#586069',
+  backgroundBlue: '#eaf5ff',
 }

@@ -6,28 +6,46 @@ import Loading, { loadingEnhancer } from '../components/loading'
 import { Avatar } from '../components/avatar'
 import compose from 'recompose/compose'
 import { connect } from '../utils'
+import { colors } from '../constants'
 import Tabs, { Tab } from 'material-ui/Tabs'
 import List, { ListItem } from 'material-ui/List'
+
+const Strong = props => (
+  <span {...props} style={{ fontWeight: 600, color: colors.text }} />
+)
 
 const EventComponent = p => {
   switch (p.type) {
     case 'PushEvent':
       return (
-        <div>
-          <Link to={`/user/${p.actor.login}`}>{p.actor.login}</Link>
-          pushed to
-          <Link to={`/repository/${p.repo.name}`}>{p.payload.ref}</Link>
-          in
-          <Link to={`/repository/${p.repo.name}`}>{p.repo.name}</Link>
-          <div>
-            {p.payload.commits.map(commit => (
-              <span>
+        <Link to={`/repository/${p.repo.name}`}>
+          <Strong>{p.actor.login}</Strong> pushed to{' '}
+          <span
+            style={{
+              color: colors.link,
+              // backgroundColor: colors.backgroundBlue,
+            }}
+          >
+            {p.payload.ref}
+          </span>{' '}
+          in <Strong>{p.repo.name}</Strong>
+          {p.payload.commits.map(commit => (
+            <div>
+              <span style={{ color: colors.link, fontFamily: 'monospace' }}>
                 {commit.sha.slice(0, 7)}
-                {commit.message}
-              </span>
-            ))}
-          </div>
-        </div>
+              </span>{' '}
+              {commit.message}
+            </div>
+          ))}
+        </Link>
+      )
+    case 'PullRequestEvent':
+      return (
+        <Link to={`/repository/${p.repo.name}`}>
+          <Strong>{p.actor.login}</Strong> {p.payload.action} pull request{' '}
+          <Strong>{p.repo.name}</Strong>
+          <Strong>#{p.payload.number}</Strong>
+        </Link>
       )
     default:
       return null
@@ -35,15 +53,20 @@ const EventComponent = p => {
 }
 
 const Home = ({ data: { payload } }) => (
-  <div>
-    <ul>
+  <div style={{ fontSize: 14, wordWrap: 'break-word' }}>
+    <List>
       {payload.map(item => (
-        <li key={item.id}>
-          <Avatar src={item.actor.avatar_url} />
+        <ListItem
+          key={item.id}
+          style={{ padding: 8, alignItems: 'flex-start' }}
+        >
+          <Link to={`/user/${item.actor.login}`}>
+            <Avatar style={{ marginRight: 8 }} src={item.actor.avatar_url} />
+          </Link>
           <EventComponent {...item} />
-        </li>
+        </ListItem>
       ))}
-    </ul>
+    </List>
   </div>
 )
 

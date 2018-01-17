@@ -25,6 +25,5 @@ export const Loading = () => (
 //     React.cloneElement(children, { data })
 //   )
 
-export const loadingEnhancer = Component => {
-  return props => (props.data.loading ? <Loading /> : <Component {...props} />)
-}
+export const loadingEnhancer = Component => props =>
+  props.data.loading ? <Loading /> : <Component {...props} />
