@@ -15,7 +15,7 @@ const UserOverview = ({ data: { user } }) => (
     <Avatar src={user.avatarUrl} />
     <List>
       {user.pinnedRepositories.nodes.map(node => (
-        <Link to={`/repository/${node.nameWithOwner}`} key={node.nameWithOwner}>
+        <Link to={`/repo/${node.nameWithOwner}`} key={node.nameWithOwner}>
           <ListItem>
             <Repo />
             {node.nameWithOwner}

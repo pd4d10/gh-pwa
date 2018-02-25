@@ -15,6 +15,8 @@ import Info from 'material-ui-icons/Info'
 import Menu from 'material-ui-icons/Menu'
 import withState from 'recompose/withState'
 import compose from 'recompose/compose'
+import { colors } from '../constants'
+import withStyles from 'material-ui/styles/withStyles'
 
 function getTitle(history) {
   history.path
@@ -26,28 +28,29 @@ const Header = props => (
       <title>abc</title>
     </Helmet> */}
     <AppBar
-    // iconElementLeft={
-    //   // Have to be a conditional operator instead of disjunction
-    //   p.isListPage ? (
-    //     undefined
-    //   ) : (
-    //     <IconButton>
-    //       <ArrowBack />
-    //     </IconButton>
-    //   )
-    // }
-    // onLeftIconButtonClick={e => {
-    //   // https://github.com/callemall/material-ui/issues/5070#issuecomment-244127708
-    //   e.preventDefault()
-    //   p.setOpen(open => !open)
+      classes={{ colorPrimary: props.classes.appbar }}
+      // iconElementLeft={
+      //   // Have to be a conditional operator instead of disjunction
+      //   p.isListPage ? (
+      //     undefined
+      //   ) : (
+      //     <IconButton>
+      //       <ArrowBack />
+      //     </IconButton>
+      //   )
+      // }
+      // onLeftIconButtonClick={e => {
+      //   // https://github.com/callemall/material-ui/issues/5070#issuecomment-244127708
+      //   e.preventDefault()
+      //   p.setOpen(open => !open)
 
-    //   // if (p.history.length === 1) {
-    //   //   // If no history, go home
-    //   //   p.history.push('/')
-    //   // } else {
-    //   //   p.history.goBack()
-    //   // }
-    // }}
+      //   // if (p.history.length === 1) {
+      //   //   // If no history, go home
+      //   //   p.history.push('/')
+      //   // } else {
+      //   //   p.history.goBack()
+      //   // }
+      // }}
     >
       <Toolbar>
         {props.location.pathname === '/' ? (
@@ -93,4 +96,10 @@ const Header = props => (
   </div>
 )
 
-export default compose(withRouter, withState('open', 'setOpen', false))(Header)
+export default compose(
+  withRouter,
+  withState('open', 'setOpen', false),
+  withStyles({
+    appbar: { backgroundColor: colors.text },
+  })
+)(Header)

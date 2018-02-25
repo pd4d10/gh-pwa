@@ -23,6 +23,7 @@ import Settings from './containers/settings'
 // import Following from './containers/following'
 // import Repositories from './containers/repositories'
 import Repository from './containers/repository'
+import grey from 'material-ui/colors/grey'
 // import Stars from './containers/stars'
 
 // Needed for onTouchTap
@@ -52,8 +53,10 @@ const client = new ApolloClient({
 })
 
 const theme = createMuiTheme({
-  // appBar: {
-  //   color: colors.primary,
+  // palette: {
+  //   primary: {
+  //     main: colors.text,
+  //   }
   // },
 })
 
@@ -66,7 +69,7 @@ ReactDOM.render(
           <div style={{ marginTop: 56 }}>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/repository/:owner/:name" component={Repository} />
+              <Route path="/repo/:owner/:name" component={Repository} />
               {/* <Route path="/user/:login/stars" component={Stars} />
               <Route
                 path="/user/:login/repositories"

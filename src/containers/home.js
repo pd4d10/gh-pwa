@@ -18,7 +18,7 @@ const EventComponent = p => {
   switch (p.type) {
     case 'PushEvent':
       return (
-        <Link to={`/repository/${p.repo.name}`}>
+        <Link to={`/repo/${p.repo.name}`}>
           <Strong>{p.actor.login}</Strong> pushed to{' '}
           <span
             style={{
@@ -30,7 +30,7 @@ const EventComponent = p => {
           </span>{' '}
           in <Strong>{p.repo.name}</Strong>
           {p.payload.commits.map(commit => (
-            <div>
+            <div key={commit.sha}>
               <span style={{ color: colors.link, fontFamily: 'monospace' }}>
                 {commit.sha.slice(0, 7)}
               </span>{' '}
@@ -41,10 +41,29 @@ const EventComponent = p => {
       )
     case 'PullRequestEvent':
       return (
-        <Link to={`/repository/${p.repo.name}`}>
+        <Link to={`/repo/${p.repo.name}`}>
           <Strong>{p.actor.login}</Strong> {p.payload.action} pull request{' '}
           <Strong>{p.repo.name}</Strong>
           <Strong>#{p.payload.number}</Strong>
+          <div>{p.payload.pull_request.title}</div>
+        </Link>
+      )
+    case 'IssuesEvent':
+      return (
+        <Link to={`/repo/${p.repo.name}/issue/${p.id}`}>
+          <Strong>{p.actor.login}</Strong> {p.payload.action} issue{' '}
+          <Strong>{p.repo.name}</Strong>
+          <Strong>#{p.payload.issue.number}</Strong>
+          <div>{p.payload.issue.title}</div>
+        </Link>
+      )
+    case 'IssueCommentEvent':
+      return (
+        <Link to={`/repo/${p.repo.name}/issue/${p.id}`}>
+          <Strong>{p.actor.login}</Strong> commented on issue{' '}
+          <Strong>{p.repo.name}</Strong>
+          <Strong>#{p.payload.issue.number}</Strong>
+          <div>{p.payload.comment.body}</div>
         </Link>
       )
     default:
@@ -53,7 +72,7 @@ const EventComponent = p => {
 }
 
 const Home = ({ data: { payload } }) => (
-  <div style={{ fontSize: 14, wordWrap: 'break-word' }}>
+  <div style={{ fontSize: 14, wordWrap: 'break-word', wordBreak: 'break-all' }}>
     <List>
       {payload.map(item => (
         <ListItem

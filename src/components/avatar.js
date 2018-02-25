@@ -6,7 +6,7 @@ export const Avatar = props => (
     style={{
       width: 48,
       height: 48,
-      borderRadius: 4,
+      borderRadius: '50%',
       ...(props.style || {}),
     }}
   />

@@ -12,7 +12,7 @@ const paragraphStyle = {
 export const Repositories = ({ repositories, login }) => (
   <div>
     {repositories.nodes.map(repo => (
-      <Link to={`/repository/${repo.owner.login}/${repo.name}`}>
+      <Link to={`/repo/${repo.owner.login}/${repo.name}`}>
         <ListItem
           // style={{
           //   display: 'flex',
